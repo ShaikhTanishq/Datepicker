@@ -1,0 +1,34 @@
+@mixin decorate{
+    background-color: antiquewhite;
+    color: darkcyan;
+    display: flex;
+    float: left;
+    font-size: 35px;
+    position: relative;
+    margin-top: 10%;
+    margin-left: 50px;
+}
+.home{
+ @include decorate; 
+}
+
+.tanishq{
+    @include decorate;  
+   }
+
+   .shradha{
+    @include decorate;  
+   }
+
+   .shravya{
+    @include decorate;  
+   }
+   
+   .datepicker{
+    @include decorate;  
+   }
+
+   .daterangepicker{
+    @include decorate;  
+   }
+   

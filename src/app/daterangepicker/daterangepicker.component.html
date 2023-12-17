@@ -1,0 +1,53 @@
+<!-- This file disables all the previous dates and if you select a date range it displays the list of holidays that fall under that range -->
+<body>
+  <mat-form-field>
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker" >
+      <input
+        matStartDate
+        placeholder="Start date"
+        [(ngModel)]="selectedStartDate"
+      />
+      <input
+        matEndDate
+        placeholder="End date"
+        [(ngModel)]="selectedEndDate"
+        (ngModelChange)="onDateRangeSelected()"
+      />
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+
+  <div *ngIf="selectedStartDate && selectedEndDate">
+    <h3>Holidays in the Selected Range</h3>
+    <div *ngIf="holidaysInSelectedRange.length > 0; else noHolidaysFound">
+      <ul>
+         <!--  <li *ngFor="let holiday of holidaysInSelectedRange">
+        <span
+            [ngStyle]="{
+              'background-color':
+                (holiday.category === 'A' && 'lightblue') ||
+                (holiday.category === 'B' && 'yellow') ||
+                (holiday.category === 'C' && 'pink') ||
+                'transparent'
+            }"
+            class="holiday"
+          >
+            {{ holiday.day }} ({{ holiday.date | date : "MM/dd/yyyy" }})
+          </span> -->
+          <div *ngFor="let holiday of holidaysInSelectedRange"
+  [ngClass]="getHolidayClass(holiday.category)"
+  class="holiday">
+  {{ holiday.day }} - {{ holiday.date }}
+</div>
+
+     
+      </ul>
+    </div>
+    <ng-template #noHolidaysFound>
+      <p>No holidays found in the selected date range.</p>
+    </ng-template>
+  </div>
+</body>
